@@ -17,7 +17,7 @@ template <class T, class Y>T GCD(T a, Y b){if(a<b){int c=a;a=b;b=c;}if (a % b ==
 template<class T,class Y>T LCM(T a,Y b){return (a*b)/GCD(a,b);}
 void clear(queue<pair<int, int>> &q){queue<pair<int, int>> empty;swap(q, empty);} //queueの中身の型は適時変更を忘れない
 
-using vi=vector<int>;
+using vi=vector<ll>;
 using vii=vector<vi>;
 
 #define REP(i,a,b) for(ll i=(a);i<(b);i++)
@@ -28,7 +28,18 @@ using vii=vector<vi>;
 #define decimal(x) fixed<<setprecision(x)
 
 int main(){
-
+    ll n,ans=1;
+    string s;
+    cin>>n>>s;
+    vi cnt(26,1);
+    rep(i,n){
+        cnt['z'-s[i]]++;
+    }
+    rep(i,26){
+        if(!cnt[i])continue;
+        ans=(ans*cnt[i])%INF;
+    }
+    cout<<ans-1<<endl;
     return 0;
 }
 /*

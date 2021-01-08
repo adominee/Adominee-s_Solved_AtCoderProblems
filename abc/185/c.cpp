@@ -1,3 +1,5 @@
+//解説AC
+
 #include <bits/stdc++.h>
 
 using namespace std;
@@ -28,7 +30,13 @@ using vii=vector<vi>;
 #define decimal(x) fixed<<setprecision(x)
 
 int main(){
-
+  ll l,ans;
+  cin>>l;
+  ans=l-1;
+  REP(i,1,11){
+    ans=(ans*(l-(i+1)))/(i+1);
+  }
+  cout<<ans<<endl;
   return 0;
 }
 /*

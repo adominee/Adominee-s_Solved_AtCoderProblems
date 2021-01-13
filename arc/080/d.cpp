@@ -36,13 +36,13 @@ int main(){
   rep(i,h){
     if(i%2==0){
       rep(j,w){
-        c[i][j]=cnt;
+        c[i][j]=cnt+1;
         a[cnt]--;
         if(a[cnt]==0)cnt++;
       }
     }else{
       for(int j=w-1;j>=0;j--){
-        c[i][j]=cnt;
+        c[i][j]=cnt+1;
         a[cnt]--;
         if(a[cnt]==0)cnt++;
       }

@@ -1,3 +1,8 @@
+/*
+参考
+http://algorithms.blog55.fc2.com/blog-entry-132.html
+*/
+
 #include <bits/stdc++.h>
 
 using namespace std;
@@ -27,15 +32,40 @@ using vii=vector<vi>;
 #define ALL(a) (a).begin(),(a).end()
 #define decimal(x) fixed<<setprecision(x)
 
+struct Rectangle{ll height;int pos;};
+
 int main(){
-  int x;
-  cin>>x;
-  ll sum=x,k=1;
-  while(sum%360!=0){
-    k++;
-    sum+=x;
+  int n;
+  cin>>n;
+  vi a(n+1,0);
+  rep(i,n){
+    cin>>a[i];
   }
-  cout<<k<<endl;
+  stack<Rectangle> S;
+  ll maxv=0;
+  rep(i,n+1){
+    Rectangle rect;
+    rect.height=a[i];
+    rect.pos=i;
+    if(S.empty()){
+      S.push(rect);
+    }else{
+      if(S.top().height<rect.height){
+        S.push(rect);
+      }else if(S.top().height>rect.height){
+        int target=i;
+        while(!S.empty()&&S.top().height>=rect.height){
+          Rectangle pre=S.top();S.pop();
+          ll area=pre.height*(i-pre.pos);
+          maxv=max(maxv,area);
+          target=pre.pos;
+        }
+        rect.pos=target;
+        S.push(rect);
+      }
+    }
+  }
+  cout<<maxv<<endl;
   return 0;
 }
 /*

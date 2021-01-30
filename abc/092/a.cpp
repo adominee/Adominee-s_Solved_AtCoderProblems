@@ -28,14 +28,9 @@ using vii=vector<vi>;
 #define decimal(x) fixed<<setprecision(x)
 
 int main(){
-  int x;
-  cin>>x;
-  ll sum=x,k=1;
-  while(sum%360!=0){
-    k++;
-    sum+=x;
-  }
-  cout<<k<<endl;
+  int a,b,c,d;
+  cin>>a>>b>>c>>d;
+  cout<<min(a,b)+min(c,d)<<endl;
   return 0;
 }
 /*

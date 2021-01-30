@@ -28,16 +28,20 @@ using vii=vector<vi>;
 #define decimal(x) fixed<<setprecision(x)
 
 int main(){
-  int x;
-  cin>>x;
-  ll sum=x,k=1;
-  while(sum%360!=0){
-    k++;
-    sum+=x;
+  int a,b;
+  cin>>a>>b;
+  vector<string> s(4);
+  char c=(a<b? '.':'#');
+  rep(i,4){
+    rep(j,max(a,b)){
+      s[i][j]=c;
+    }
   }
-  cout<<k<<endl;
   return 0;
 }
 /*
 
+.#
+#.
+を基本として、肉付け？
 */

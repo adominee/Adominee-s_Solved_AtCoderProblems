@@ -28,14 +28,10 @@ using vii=vector<vi>;
 #define decimal(x) fixed<<setprecision(x)
 
 int main(){
-  int x;
-  cin>>x;
-  ll sum=x,k=1;
-  while(sum%360!=0){
-    k++;
-    sum+=x;
-  }
-  cout<<k<<endl;
+  string s;
+  cin>>s;
+  if(s[0]==s[1]&&s[1]==s[2])cout<<"Won"<<endl;
+  else cout<<"Lost"<<endl;
   return 0;
 }
 /*

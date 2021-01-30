@@ -28,14 +28,28 @@ using vii=vector<vi>;
 #define decimal(x) fixed<<setprecision(x)
 
 int main(){
-  int x;
-  cin>>x;
-  ll sum=x,k=1;
-  while(sum%360!=0){
-    k++;
-    sum+=x;
+  int n;
+  cin>>n;
+  ll num=pow(2,n);
+  vi a(num),b(num),c;
+  rep(i,num){
+    cin>>a[i];
+    b[i]=i;
   }
-  cout<<k<<endl;
+  rep(i,n-1){
+    ll players=pow(2,n-i);
+    for(int j=0;j<players;j+=2){
+      ll x=b[j],y=b[j+1];
+      if(a[x]<a[y])c.pb(y);
+      else c.pb(x);
+    }
+    //for(auto x:c)cout<<x<<" ";
+    //cout<<endl;
+    b=c;
+    c.clear();
+  }
+  if(a[b[0]]<a[b[1]])cout<<b[0]+1<<endl;
+  else cout<<b[1]+1<<endl;
   return 0;
 }
 /*

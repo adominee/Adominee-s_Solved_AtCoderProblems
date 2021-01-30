@@ -28,14 +28,21 @@ using vii=vector<vi>;
 #define decimal(x) fixed<<setprecision(x)
 
 int main(){
-  int x;
-  cin>>x;
-  ll sum=x,k=1;
-  while(sum%360!=0){
-    k++;
-    sum+=x;
+  int n;
+  cin>>n;
+  ll sum=0;
+  vi a(n),b(n);
+  rep(i,n){
+    cin>>a[i];
   }
-  cout<<k<<endl;
+  rep(i,n){
+    cin>>b[i];
+  }
+  rep(i,n){
+    sum+=a[i]*b[i];
+  }
+  if(sum==0)cout<<"Yes"<<endl;
+  else cout<<"No"<<endl;
   return 0;
 }
 /*

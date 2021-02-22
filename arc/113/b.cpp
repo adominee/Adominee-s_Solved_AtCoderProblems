@@ -17,7 +17,7 @@ template <class T, class Y>T GCD(T a, Y b){if(a<b){int c=a;a=b;b=c;}if (a % b ==
 template<class T,class Y>T LCM(T a,Y b){return (a*b)/GCD(a,b);}
 void clear(queue<pair<int, int>> &q){queue<pair<int, int>> empty;swap(q, empty);} //queueの中身の型は適時変更を忘れない
 
-using vi=vector<ll>;
+using vi=vector<int>;
 using vii=vector<vi>;
 
 #define REP(i,a,b) for(ll i=(a);i<(b);i++)
@@ -27,32 +27,23 @@ using vii=vector<vi>;
 #define ALL(a) (a).begin(),(a).end()
 #define decimal(x) fixed<<setprecision(x)
 
-int main(){
-  int n;
-  ll ans=1;
-  cin>>n;
-  vector<string> s(n);
-  vi t(n+1,1),f(n+1,1);
-  rep(i,n)cin>>s[i];
-  rep(i,n){
-    if(s[i]=="OR"){
-      t[i+1]=t[i]*2+f[i];
-      f[i+1]=f[i];
-    }else{
-      t[i+1]=t[i];
-      f[i+1]=f[i]*2+t[i];
-      //ANDとORの性質を考えてtとfを加算する。
-      //ANDのとき、xの値がどちらでもfに変わらないので、f[i]に2をかける
-      //yが1ならxは0でないと次のyが0にならないので、t[i]をそのまま足す。
+long long modpow(long long a, long long n, long long mod) {
+    long long res = 1;
+    while (n > 0) {
+        if (n & 1) res = res * a % mod;
+        a = a * a % mod;
+        n >>= 1;
     }
-  }
-  cout<<t[n]<<endl;
+    return res;
+}
+
+int main(){
+  ll a,b,c;
+  cin>>a>>b>>c;
+  ll ans=modpow(a,pow(b,c),10);
+  cout<<ans<<endl;
   return 0;
 }
 /*
-小さな問題に帰着していくのは思いつかなかった。
-そこまでのtrueとfalseを記録して求めるのか―
-なんで前はわかったんだ。。？
-xがtrueかfalseかで遷移式を書く
-OverFlow!!!
+
 */

@@ -1,8 +1,3 @@
-/*
-参考
-http://algorithms.blog55.fc2.com/blog-entry-132.html
-*/
-
 #include <bits/stdc++.h>
 
 using namespace std;
@@ -22,7 +17,7 @@ template <class T, class Y>T GCD(T a, Y b){if(a<b){int c=a;a=b;b=c;}if (a % b ==
 template<class T,class Y>T LCM(T a,Y b){return (a*b)/GCD(a,b);}
 void clear(queue<pair<int, int>> &q){queue<pair<int, int>> empty;swap(q, empty);} //queueの中身の型は適時変更を忘れない
 
-using vi=vector<int>;
+using vi=vector<ll>;
 using vii=vector<vi>;
 
 #define REP(i,a,b) for(ll i=(a);i<(b);i++)
@@ -32,42 +27,35 @@ using vii=vector<vi>;
 #define ALL(a) (a).begin(),(a).end()
 #define decimal(x) fixed<<setprecision(x)
 
-struct Rectangle{ll height;int pos;};
-
 int main(){
   int n;
+  ll ans=0;
   cin>>n;
   vi a(n+1,0);
-  rep(i,n){
-    cin>>a[i];
-  }
-  stack<Rectangle> S;
-  ll maxv=0;
+  rep(i,n)cin>>a[i];
+  stack<pair<ll,ll>> st;
   rep(i,n+1){
-    Rectangle rect;
-    rect.height=a[i];
-    rect.pos=i;
-    if(S.empty()){
-      S.push(rect);
-    }else{
-      if(S.top().height<rect.height){
-        S.push(rect);
-      }else if(S.top().height>rect.height){
-        int target=i;
-        while(!S.empty()&&S.top().height>=rect.height){
-          Rectangle pre=S.top();S.pop();
-          ll area=pre.height*(i-pre.pos);
-          maxv=max(maxv,area);
-          target=pre.pos;
-        }
-        rect.pos=target;
-        S.push(rect);
-      }
+    if(st.empty()){
+      st.emplace(a[i],i);
+      continue;
     }
+    if(a[i]>st.top().first){
+      st.emplace(a[i],i);
+      continue;
+    }
+    if(a[i]==st.top().first)continue;
+    ll target;
+    while(!st.empty()&&st.top().first>=a[i]){
+      chmax(ans,ll((i-st.top().second)*st.top().first));
+      target=st.top().second;
+      st.pop();
+      //cout<<i<<" "<<p<<" "<<ans<<endl;
+    }
+    st.emplace(a[i],target);
   }
-  cout<<maxv<<endl;
+  cout<<ans<<endl;
   return 0;
 }
 /*
-
+区間和はO(1)
 */

@@ -17,7 +17,7 @@ template <class T, class Y>T GCD(T a, Y b){if(a<b){int c=a;a=b;b=c;}if (a % b ==
 template<class T,class Y>T LCM(T a,Y b){return (a*b)/GCD(a,b);}
 void clear(queue<pair<int, int>> &q){queue<pair<int, int>> empty;swap(q, empty);} //queueの中身の型は適時変更を忘れない
 
-using vi=vector<ll>;
+using vi=vector<int>;
 using vii=vector<vi>;
 
 #define REP(i,a,b) for(ll i=(a);i<(b);i++)
@@ -26,43 +26,31 @@ using vii=vector<vi>;
 #define rv reverse
 #define ALL(a) (a).begin(),(a).end()
 #define decimal(x) fixed<<setprecision(x)
+const int X=55555;
+vector<bool> flags(X/2,true);
+
+void sieve(){
+  flags[0]=false;
+  REP(i,1,(sqrt(X)+1)/2){
+    if(!flags[i])continue;
+    ll p=2*i+1;
+    for(ll mult=2*i*(i+1);mult<flags.size();mult+=p)
+      flags[mult]=false;
+  }
+}
 
 int main(){
-  ll n,d=-1;
+  int n;
   cin>>n;
-  vii graph(n);
-  vector<pll> p;
-  map<pll,int>mp;
-  mp[{0,-1}]=-1;
-  rep(i,n-1){
-    int a,b;
-    cin>>a>>b;
-    a--,b--;
-    p.pb({a,b});
-    graph[a].pb(b);
-    graph[b].pb(a);
-  }
-  rep(i,n)chmax(d,ll(graph[i].size()));
-  queue<pll>que;
-  que.emplace(0,-1);
-  while(!que.empty()){
-    auto& [a,b]=que.front();
-    que.pop();
-    ll uc=mp[{min(a,b),max(a,b)}],color=1;
-    for(auto x:graph[a]){
-      if(x==b||mp[{min(a,x),max(a,x)}]!=0){
-        continue;
-      }
-      if(color==uc)color++;
-      mp[{min(a,x),max(a,x)}]=color;
-      color++;
-      que.emplace(x,a);
+  sieve();
+  vi ans;
+  rep(i,X/2){
+    if(flags[i]&&(2*i+1)%5==1){
+      ans.pb(2*i+1);
+      if(ans.size()>=n)break;
     }
   }
-  cout<<d<<endl;
-  for(auto& [a,b]:p){
-    cout<<mp[{a,b}]<<endl;
-  }
+  for(auto x:ans)cout<<x<<endl;
   return 0;
 }
 /*
